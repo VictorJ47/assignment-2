@@ -49,12 +49,21 @@ function addC() {
 
 // Remove a row
 function removeR() {
-    alert("Clicked Remove Row"); // Replace this line with your code.
+    let table = document.getElementById("grid");
+    //make sure the table isn't empty
+    if(table.rows.length > 0){
+        table.deleteRow(table.rows.length - 1); //remove the last row (bottom row)
+    }
 }
 
 // Remove a column
 function removeC() {
-    alert("Clicked Remove Col"); // Replace this line with your code.
+    let table = document.getElementById("grid");
+    for (let row of table.rows) {
+        if (row.cells.length > 0){
+            row.deleteCell(row.cells.length - 1);
+        }
+    }
 }
 
 // Set global variable for selected color
