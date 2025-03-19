@@ -114,6 +114,7 @@ function clearAll(){
     }
 }
 
+//function to color individual cells upon being clicked on
 function colorCell(cell){
     if (colorSelected) {
         cell.style.backgroundColor = colorSelected;
@@ -123,6 +124,7 @@ function colorCell(cell){
     }
 }
 
+//event listener for clicking on cells (td)
 document.getElementById("grid").addEventListener("click", function(event) {
     if (event.target.tagName === "TD") {
         colorCell(event.target);
