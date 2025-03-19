@@ -16,7 +16,6 @@ function addR() {
     //creating cols, or "table data"m (td)
     for(let i = 0; i < newCols; i++){
         let newCell = document.createElement("td");
-        //newCell.onclick = function() {colorCell(this); };
         newRow.appendChild(newCell); //add this cell to the new row
         //basically, row is a list and your adding new cells
         //representing columns
@@ -39,7 +38,6 @@ function addC() {
         //for each row in rows, we append a new cell (td)
         for(let row of table.rows) {
             let newCell = document.createElement("td");
-            //newCell.onclick = function() {colorCell(this); };
             row.appendChild(newCell)
         }
     }
@@ -74,15 +72,59 @@ function selectColor(){
 
 // Fill all uncolored cells
 function fillU(){
-    alert("Clicked Fill All Uncolored"); // Replace this line with your code.
+    let table = document.getElementById("grid");
+    if(colorSelected){
+    //traverse grid, setting cell to selected color if cell is white or uncolored
+        for(let row of table.rows) {
+            for(let cell of row.cells) {
+                if(!cell.style.backgroundColor || cell.style.backgroundColor === "white") {
+                    cell.style.backgroundColor = colorSelected; 
+                }
+            }
+        }
+    }
+    else{
+        alert("Please Select a Color.");
+    }
 }
 
 // Fill all cells
 function fillAll(){
-    alert("Clicked Fill All"); // Replace this line with your code.
+    if(colorSelected){
+        let table = document.getElementById("grid");
+        for(let row of table.rows){
+            for(let cell of row.cells){
+                cell.style.backgroundColor = colorSelected;
+            }
+        }   
+    }
+    else{
+        alert("Please Select a Color.");      
+    }
+    
 }
 
 // Clear all cells
 function clearAll(){
-    alert("Clicked Clear All"); // Replace this line with your code.
+    let table = document.getElementById("grid");
+    for(let row of table.rows){
+        for(let cell of row.cells){
+            cell.style.backgroundColor = "white";
+        }
+    }
 }
+
+function colorCell(cell){
+    if (colorSelected) {
+        cell.style.backgroundColor = colorSelected;
+    }
+    else{
+        alert("Please Select a Color.");
+    }
+}
+
+document.getElementById("grid").addEventListener("click", function(event) {
+    if (event.target.tagName === "TD") {
+        colorCell(event.target);
+    }
+});
